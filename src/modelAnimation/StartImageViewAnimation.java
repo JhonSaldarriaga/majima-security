@@ -1,29 +1,22 @@
 package modelAnimation;
 
-import javafx.scene.image.Image;
-
-public class CursedMajimaAnimation {
-
-	public static final Image[] IMAGES = {new Image("images/copjima_hand.png"), 
-			new Image("images/transicion_1.png"),new Image("images/transicion_2.png"),
-			new Image("images/cursed_majima.png")};
+public class StartImageViewAnimation {
 	
-	public static final int MILIS_SPEED = 50;
+	public static final int MILIS_SPEED = 10;
 	
-	public final int MAX_IMAGEVIEW_WIDTH = 270;
-	public final int MIN_IMAGEVIEW_WIDTH = 110;
-	public final int MAX_IMAGEVIEW_HEIGHT = 260;
-	public final int MIN_IMAGEVIEW_HEIGHT = 100;
-	public final int CHANGE_SIZE_VALUE_IMAGEVIEW = 10;
+	public final int MAX_IMAGEVIEW_WIDTH = 215;
+	public final int MIN_IMAGEVIEW_WIDTH = 10;
+	public final int MAX_IMAGEVIEW_HEIGHT = 215;
+	public final int MIN_IMAGEVIEW_HEIGHT = 10;
+	public final int CHANGE_SIZE_VALUE_IMAGEVIEW = 5;
 	
-	public final int MAX_LAYAOUTX = 95;
-	public final int MIN_LAYAOUTX = 15;
-	public final int MAX_LAYAOUTY = 112;
-	public final int MIN_LAYAOUTY = 48;
-	public final int CHANGE_SIZE_VALUE_LAYAOUTX = 5;
-	public final int CHANGE_SIZE_VALUE_LAYAOUTY = 4;
+	public final int MAX_LAYAOUTX = 348;
+	public final int MIN_LAYAOUTX = 225;
+	public final int MAX_LAYAOUTY = 373;
+	public final int MIN_LAYAOUTY = 250;
+	public final int CHANGE_SIZE_VALUE_LAYAOUTX = 3;
+	public final int CHANGE_SIZE_VALUE_LAYAOUTY = 3;
 	
-	private Image image;
 	private int widthImageView;
 	private int heightImageView;
 	private int layaoutX;
@@ -31,8 +24,7 @@ public class CursedMajimaAnimation {
 	
 	private boolean work;
 
-	public CursedMajimaAnimation() {
-		image = IMAGES[0];
+	public StartImageViewAnimation() {
 		
 		widthImageView = MIN_IMAGEVIEW_WIDTH;
 		heightImageView = MIN_IMAGEVIEW_HEIGHT;
@@ -58,10 +50,6 @@ public class CursedMajimaAnimation {
 		image = IMAGES[];
 	}
 	*/
-	
-	public Image getImage() {
-		return image;
-	}
 
 	public int getWidthImageView() {
 		return widthImageView;
@@ -77,10 +65,6 @@ public class CursedMajimaAnimation {
 
 	public int getLayaoutY() {
 		return layaoutY;
-	}
-	
-	public void setImage(Image image) {
-		this.image = image;
 	}
 
 	public void setWidthImageView(int widthImageView) {

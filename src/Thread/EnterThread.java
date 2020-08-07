@@ -17,8 +17,8 @@ public class EnterThread extends Thread{
 	
 	@Override
 	public void run() {
-		enterAnimationController.setWork(true);
-		while(enterAnimationController.isWork()) {
+		enterAnimationController.startWork();
+		while(enterAnimationController.isWorking()) {
 			
 			System.out.print("");//I don't know why i need this sentence of code to all work good ;-;
 			

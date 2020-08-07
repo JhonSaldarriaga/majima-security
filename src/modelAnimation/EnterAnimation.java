@@ -29,11 +29,15 @@ public class EnterAnimation {
 		return imageSelected;
 	}
 
-	public boolean isWork() {
+	public boolean isWorking() {
 		return work;
 	}
-
-	public void setWork(boolean work) {
-		this.work = work;
+	
+	public void startWork() {
+		work = true;
+	}
+	
+	public void stopWork() {
+		work = false;
 	}
 }
