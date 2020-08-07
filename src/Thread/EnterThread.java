@@ -1,7 +1,8 @@
 package Thread;
 
 import javafx.application.Platform;
-import model.EnterAnimation;
+
+import modelAnimation.EnterAnimation;
 import ui.MajimaGUI;
 
 public class EnterThread extends Thread{
@@ -24,7 +25,7 @@ public class EnterThread extends Thread{
 			if(controller.isEnterSelected()) {
 				if(enterAnimationController.getImageSelected()==0) {
 					
-					enterAnimationController.changeImage(EnterAnimation.images[1], 1);
+					enterAnimationController.changeImage(EnterAnimation.IMAGES[1], 1);
 		
 					Platform.runLater(new Thread() {
 						public void run() {
@@ -34,7 +35,7 @@ public class EnterThread extends Thread{
 				}
 			}else {
 				if(enterAnimationController.getImageSelected()==1) {
-					enterAnimationController.changeImage(EnterAnimation.images[0], 0);
+					enterAnimationController.changeImage(EnterAnimation.IMAGES[0], 0);
 					
 					Platform.runLater(new Thread() {
 						public void run() {

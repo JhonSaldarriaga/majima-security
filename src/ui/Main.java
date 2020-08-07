@@ -35,7 +35,7 @@ public class Main extends Application{
 
 		Scene scene = new Scene(parent);
 		primaryStage.setScene(scene);
-		primaryStage.setHeight(700);
+		primaryStage.setHeight(750);
 		primaryStage.setWidth(700);
 		primaryStage.setResizable(false);
 		primaryStage.getIcons().add(new Image("images/majima's icon.png"));
