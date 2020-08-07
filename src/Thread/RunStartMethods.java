@@ -30,11 +30,11 @@ public class RunStartMethods extends Thread{
 			}
 		});
     	
-    	try {
-    		majimaThread.join();
+		try {
+			majimaThread.join();
 			startLabelThread.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
     	
     	Platform.runLater(new Thread() {

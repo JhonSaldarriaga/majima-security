@@ -53,6 +53,19 @@ public class MajimaGUI {
     @FXML
     private ImageView enterButtonAnimation;
 
+    //LOGIN
+    @FXML
+    private TextField textFieldLogin;
+
+    @FXML
+    private ImageView cursedLoginAnimation;
+
+    @FXML
+    private PasswordField passwordFieldLogin;
+    
+    @FXML
+    private ImageView enterButtonLoginAnimation;
+    
     //RELATIONS
     private EnterAnimation enterAnimationController;
     private CursedMajimaAnimation cursedAnimationController;
@@ -142,6 +155,8 @@ public class MajimaGUI {
     public void updateOpacity() {
     	mainPane.setOpacity(transition.getCurrentValue());
     }
+ //->
+    
     /////
     
     //-START APPLICATION METHODS
@@ -162,7 +177,7 @@ public class MajimaGUI {
     	if(accounts.isPasswordEmpty()) {
     		startTransitionAnimation("Welcome.fxml");
     	}else
-    		load("MajimaGUI.fxml");
+    		startTransitionAnimation("login.fxml");
     }
     /////
     
@@ -177,4 +192,15 @@ public class MajimaGUI {
 		startCursedAnimation();
     }
     /////
+	
+	//-LOGIN METHODS FXML
+    @FXML
+    void showPasswordLogin(ActionEvent event) {
+
+    }
+
+    @FXML
+    void enterLoginAnimation(ActionEvent event) {
+
+    }
 }
