@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.Controller;
 import modelAnimation.*;
@@ -58,14 +59,6 @@ public class MajimaGUI {
 		dropdownMenuGUI = new DropdownMenuGUI();
 	}
     
-    //INITIALIZE
-    void initializeVBOX() throws IOException {
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(DropdownMenuGUI.URL_FXML));
-    	fxmlLoader.setController(dropdownMenuGUI);
-    	Parent parent = fxmlLoader.load();
-    	menuVBOX.getChildren().setAll(parent);
-    }
-    
     //-LOADS
     public void load(String route) throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(route));
@@ -100,6 +93,13 @@ public class MajimaGUI {
     }
     /////
     
+    void initializeVBOX() throws IOException {
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(DropdownMenuGUI.URL_FXML));
+    	fxmlLoader.setController(dropdownMenuGUI);
+    	Parent parent = fxmlLoader.load();
+    	menuVBOX.getChildren().setAll(parent);
+    }
+    
     public DropdownMenuThread createdMenuAnimation() {
     	DropdownMenuThread menuThread = new DropdownMenuThread(this, menuAnimation);
     	return menuThread;
@@ -114,5 +114,9 @@ public class MajimaGUI {
     	System.out.println("click");
     	System.out.println(menuVBOX.getLayoutX());
     	createdMenuAnimation().start();
+    }
+    
+    void prueba() {
+    	
     }
 }
