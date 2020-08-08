@@ -1,206 +1,118 @@
 package ui;
 
 import java.io.IOException;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.AudioClip;
+import javafx.scene.layout.VBox;
 import model.Controller;
 import modelAnimation.*;
 import Thread.*;
 
 public class MajimaGUI {
-
-	//START
+	
+	//menuVBOX.setStyle("-fx-background-color: #000000");
+	
+	public static final String URL_FXML = "main.fxml";
+	
+	//MAIN
+	@FXML
+    private AnchorPane principalPane;
 	
     @FXML
-    private ImageView startLabelAnimation;
-
-    @FXML
-    private ImageView startMajimaAnimation;
+    private VBox menuVBOX;
 
     @FXML
     private AnchorPane mainPane;
-
-    @FXML
-    private Button startButtonAnimation;
     
-	//WELCOME
-
-    @FXML
-    private ImageView cursedMajimaAnimation;
-
-    @FXML
-    private PasswordField passwordField;
-
-    @FXML
-    private TextField passwordTextField;
-
-    @FXML
-    private PasswordField passwordFieldAgain;
-
-    @FXML
-    private TextField passwordTextFieldAgain;
-
-    @FXML
-    private ImageView enterButtonAnimation;
-
-    //LOGIN
-    @FXML
-    private TextField textFieldLogin;
-
-    @FXML
-    private ImageView cursedLoginAnimation;
-
-    @FXML
-    private PasswordField passwordFieldLogin;
-    
-    @FXML
-    private ImageView enterButtonLoginAnimation;
-    
-    //RELATIONS
-    private EnterAnimation enterAnimationController;
+    //RELATIONS WITH ANIMATION CONTROLLERS
     private CursedMajimaAnimation cursedAnimationController;
     private StartLabelAnimation startLabelAnimationController;
     private StartImageViewAnimation startMajimaAnimationController;
     private TransitionOpacityAnimation transition;
+    private DropdownMenuAnimation menuAnimation;
+    private DropdownMenuGUI dropdownMenuGUI;
     
+    //RELATION WITH GUI CONTROLLERS
+    private StartGUI startGUI;
+    private WelcomeGUI welcomeGUI;
+    private LoginGUI loginGUI;
+    
+    //RELATION WITH MODEL
     private Controller accounts;
     
     //CONSTRUCTOR
-    public MajimaGUI(EnterAnimation enterAnimationController, CursedMajimaAnimation cursedAnimationController,
-			StartLabelAnimation startLabelAnimationController, StartImageViewAnimation startMajimaAnimationController,
-			TransitionOpacityAnimation transition, Controller accounts) {
-		this.enterAnimationController = enterAnimationController;
-		this.cursedAnimationController = cursedAnimationController;
-		this.startLabelAnimationController = startLabelAnimationController;
-		this.startMajimaAnimationController = startMajimaAnimationController;
-		this.transition = transition;
-		this.accounts = accounts;
+    public MajimaGUI(Controller accounts) {
+    	this.accounts = accounts;
+		startLabelAnimationController = new StartLabelAnimation();
+		startMajimaAnimationController = new StartImageViewAnimation();
+		cursedAnimationController = new CursedMajimaAnimation();
+		
+		transition = new TransitionOpacityAnimation();
+		menuAnimation = new DropdownMenuAnimation();
+		startGUI = new StartGUI(accounts, this, startLabelAnimationController, startMajimaAnimationController);
+		welcomeGUI = new WelcomeGUI(accounts, this, cursedAnimationController);
+		loginGUI = new LoginGUI(accounts, this, cursedAnimationController);
+		dropdownMenuGUI = new DropdownMenuGUI();
 	}
-    ////
+    
+    //INITIALIZE
+    void initializeVBOX() throws IOException {
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(DropdownMenuGUI.URL_FXML));
+    	fxmlLoader.setController(dropdownMenuGUI);
+    	Parent parent = fxmlLoader.load();
+    	menuVBOX.getChildren().setAll(parent);
+    }
     
     //-LOADS
     public void load(String route) throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(route));
- 		fxmlLoader.setController(this);
+    	if(route.equals(StartGUI.URL_FXML)) {
+    		fxmlLoader.setController(startGUI);
+    	}else if(route.equals(WelcomeGUI.URL_FXML)){
+    		fxmlLoader.setController(welcomeGUI);
+    	}else if(route.equals(LoginGUI.URL_FXML)) {
+    		fxmlLoader.setController(loginGUI);
+    	}
+    	
  		Parent parent = fxmlLoader.load();
  		mainPane.getChildren().setAll(parent);
- 		
- 		if(route.equals("Welcome.fxml"))
- 			startEnterThread();
  	}
  	/////
  	
- 	///-ANIMATION METHODS
- //->
-    public void startEnterThread() {
-    	EnterThread enterThread = new EnterThread(this, enterAnimationController);
-    	enterThread.start();
-    }
-    
-    public boolean isEnterSelected() {
-    	if(enterButtonAnimation.isPressed())
-    		return true;
-    	else
-    		return false;
-    }
-    
-    public void updateEnterImage() {
-    	enterButtonAnimation.setImage(enterAnimationController.getImage());
-    }
-//->    
-    public void startCursedAnimation() {
-    	CursedMajimaThread cursedThread = new CursedMajimaThread(cursedAnimationController, this);
-    	cursedThread.start();
-    }
-
-    public void updateCursedMajimaAnimation() {
-    	cursedMajimaAnimation.setFitHeight(cursedAnimationController.getHeightImageView());
-    	cursedMajimaAnimation.setFitWidth(cursedAnimationController.getWidthImageView());
-    	
-    	cursedMajimaAnimation.setLayoutX(cursedAnimationController.getLayaoutX());
-    	cursedMajimaAnimation.setLayoutY(cursedAnimationController.getLayaoutY());
-    }
-    
-    public void updateImageCursedMajimaAnimation() {
-    	cursedMajimaAnimation.setImage(cursedAnimationController.getImage());
-    }
 //->
-    public void updateStartLabelAnimation() {
-    	startLabelAnimation.setLayoutX(startLabelAnimationController.getLayaoutX());
-    }
-//->
-    public void updateStartImageViewAnimation() {
-    	startMajimaAnimation.setFitHeight(startMajimaAnimationController.getHeightImageView());
-    	startMajimaAnimation.setFitWidth(startMajimaAnimationController.getWidthImageView());
-    	
-    	startMajimaAnimation.setLayoutX(startMajimaAnimationController.getLayaoutX());
-    	startMajimaAnimation.setLayoutY(startMajimaAnimationController.getLayaoutY());
-    }
-//->
-    public void startTransitionAnimation(String route) {
+    public TransitionThread createdTransitionAnimation(String route) {
     	TransitionThread transitionThread = new TransitionThread(transition, this, route);
-    	transitionThread.start();
+    	return transitionThread;
     }
     
     public void updateOpacity() {
     	mainPane.setOpacity(transition.getCurrentValue());
     }
  //->
-    
-    /////
-    
-    //-START APPLICATION METHODS
-    public void playKiryuChan() {
-    	AudioClip sound = new AudioClip(this.getClass().getResource("kiryu_chan.wav").toString());
-    	sound.setVolume(0.25);
-    	sound.play();
-    }
-    
-    public void setEnableStartButton() {
-    	startButtonAnimation.setDisable(false);
+    public void initializeStartAnimation() throws IOException {
+    	initializeVBOX();
+    	load(StartGUI.URL_FXML);
+    	RunStartMethods startThread = new RunStartMethods(startGUI, startMajimaAnimationController, startLabelAnimationController);
+    	startThread.start();
     }
     /////
     
-    //-START METHODS FXML
-    @FXML
-    void startProgram(ActionEvent event) throws IOException {
-    	if(accounts.isPasswordEmpty()) {
-    		startTransitionAnimation("Welcome.fxml");
-    	}else
-    		startTransitionAnimation("login.fxml");
-    }
-    /////
-    
-    //-WELCOME METHODS FXML
-    @FXML
-    void showPasswordButton(ActionEvent event) {
-
+    public DropdownMenuThread createdMenuAnimation() {
+    	DropdownMenuThread menuThread = new DropdownMenuThread(this, menuAnimation);
+    	return menuThread;
     }
     
-	@FXML
-    void clickAnimationEnter(MouseEvent event) {
-		startCursedAnimation();
+    public void updatePositionMenu() {
+    	menuVBOX.setLayoutX(menuAnimation.getCurrentPosition());
     }
-    /////
-	
-	//-LOGIN METHODS FXML
+    
     @FXML
-    void showPasswordLogin(ActionEvent event) {
-
-    }
-
-    @FXML
-    void enterLoginAnimation(ActionEvent event) {
-
+    void openDropdownMenu(MouseEvent event) {
+    	System.out.println("click");
+    	System.out.println(menuVBOX.getLayoutX());
+    	createdMenuAnimation().start();
     }
 }

@@ -1,11 +1,8 @@
 package ui;
 
 import java.io.IOException;
-
 import java.io.ObjectInputStream;
-
 import Thread.RunStartMethods;
-
 import java.io.File;
 import java.io.FileInputStream;
 import javafx.application.Application;
@@ -17,7 +14,6 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import model.Controller;
 import modelAnimation.CursedMajimaAnimation;
-import modelAnimation.EnterAnimation;
 import modelAnimation.StartImageViewAnimation;
 import modelAnimation.StartLabelAnimation;
 import modelAnimation.TransitionOpacityAnimation;
@@ -27,11 +23,6 @@ public class Main extends Application{
 
 	private MajimaGUI gui;
 	private Controller accounts;
-	private EnterAnimation enterAnimationController;
-	private CursedMajimaAnimation cursedAnimationController;
-	private StartLabelAnimation startLabelAnimationController;
-	private StartImageViewAnimation startMajimaAnimationController;
-	private TransitionOpacityAnimation transition;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -39,30 +30,23 @@ public class Main extends Application{
 
 	public Main() throws ClassNotFoundException {
 		accounts = new Controller();
-		enterAnimationController = new EnterAnimation();
-    	cursedAnimationController = new CursedMajimaAnimation();
-    	startLabelAnimationController = new StartLabelAnimation();
-    	startMajimaAnimationController = new StartImageViewAnimation();
-    	transition = new TransitionOpacityAnimation();
-		gui = new MajimaGUI(enterAnimationController, cursedAnimationController, startLabelAnimationController, startMajimaAnimationController, transition, accounts);
+		gui = new MajimaGUI(accounts);
 	}
 
 	public void start(Stage primaryStage) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Start.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(MajimaGUI.URL_FXML));
 		fxmlLoader.setController(gui);
 		Parent parent = fxmlLoader.load();
 
 		Scene scene = new Scene(parent);
 		primaryStage.setScene(scene);
-		primaryStage.setHeight(750);
 		primaryStage.setWidth(700);
+		primaryStage.setHeight(800);
 		primaryStage.setResizable(false);
 		primaryStage.getIcons().add(new Image("images/majima's icon.png"));
 		primaryStage.setTitle("Majima's Security");
 		primaryStage.show();
-		
-		RunStartMethods runStartMethods = new RunStartMethods(gui, startMajimaAnimationController, startLabelAnimationController);
-		runStartMethods.start();
+		gui.initializeStartAnimation();
 		
 		/**EventHandler<WindowEvent> e = new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent e) {

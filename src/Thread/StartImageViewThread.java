@@ -2,14 +2,14 @@ package Thread;
 
 import javafx.application.Platform;
 import modelAnimation.StartImageViewAnimation;
-import ui.MajimaGUI;
+import ui.StartGUI;
 
 public class StartImageViewThread extends Thread{
 	
 	private StartImageViewAnimation startImageViewController;
-	private MajimaGUI guiController;
+	private StartGUI guiController;
 	
-	public StartImageViewThread(StartImageViewAnimation startImageViewController, MajimaGUI guiController) {
+	public StartImageViewThread(StartImageViewAnimation startImageViewController, StartGUI guiController) {
 		this.startImageViewController = startImageViewController;
 		this.guiController = guiController;
 	}

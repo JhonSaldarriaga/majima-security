@@ -49,16 +49,6 @@ public class CursedMajimaAnimation {
 		layaoutY -= CHANGE_SIZE_VALUE_LAYAOUTY;
 	}
 	
-	/**
-	public void reset() {
-		widthImageView = MIN_IMAGEVIEW_WIDTH;
-		heightImageView = MIN_IMAGEVIEW_HEIGHT;
-		layaoutX = MAX_LAYAOUTX;
-		layaoutY = MAX_LAYAOUTY;
-		image = IMAGES[];
-	}
-	*/
-	
 	public Image getImage() {
 		return image;
 	}
@@ -109,5 +99,11 @@ public class CursedMajimaAnimation {
 	
 	public void stopWork() {
 		work = false;
+		
+		image = IMAGES[0];
+		widthImageView = MIN_IMAGEVIEW_WIDTH;
+		heightImageView = MIN_IMAGEVIEW_HEIGHT;
+		layaoutX = MAX_LAYAOUTX;
+		layaoutY = MAX_LAYAOUTY;
 	}
 }

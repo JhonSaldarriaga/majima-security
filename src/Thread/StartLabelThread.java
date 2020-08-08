@@ -2,14 +2,14 @@ package Thread;
 
 import javafx.application.Platform;
 import modelAnimation.StartLabelAnimation;
-import ui.MajimaGUI;
+import ui.StartGUI;
 
 public class StartLabelThread extends Thread{
 
 	private StartLabelAnimation startLabelController;
-	private MajimaGUI guiController;
+	private StartGUI guiController;
 	
-	public StartLabelThread(StartLabelAnimation startLabelController, MajimaGUI guiController) {
+	public StartLabelThread(StartLabelAnimation startLabelController, StartGUI guiController) {
 		this.startLabelController = startLabelController;
 		this.guiController = guiController;
 	}
